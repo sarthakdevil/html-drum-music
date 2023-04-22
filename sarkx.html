@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Button color change</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-image: url('https://cdn.pixabay.com/photo/2016/11/19/13/57/drum-set-1839383_960_720.jpg');
+        }
+
+        h1 {
+            color: green;
+        }
+h3{
+    color: aquamarine;
+}
+        /* Styling the button */
+        .btn {
+            cursor: pointer;
+            border: 1px solid #3498db;
+            background-color: transparent;
+            height: 50px;
+            width: 200px;
+            color: #f26b16;
+            font-size: 1.5em;
+            box-shadow: 0 6px 6px rgba(252, 253, 252, 0.007);
+        }
+    </style>
+</head>
+<body>
+    <button id="a" class="btn">A</button>
+    <button id="b" class="btn">B</button>
+    <button id="c" class="btn">C</button>
+    <button id="d" class="btn">D</button>
+    <button id="e" class="btn">E</button>
+    <button id="f" class="btn">F</button>
+
+    <script>
+        // Define the onclick functions
+        function setBgColor(btn, audio) {
+            btn.style.backgroundColor = 'blue';
+            audio.currentTime = 0;
+            audio.play();
+            setTimeout(function() {
+                btn.style.backgroundColor = 'transparent';
+            }, 1);
+        }
+
+        // Bind the onclick functions to the buttons
+        var buttons = document.getElementsByClassName('btn');
+        var audios = document.getElementsByTagName('audio');
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function() {
+                var audio = document.querySelector('audio[data-key="' + this.getAttribute('id').charCodeAt(0) + '"]');
+                setBgColor(this, audio);
+            }
+        }
+
+        // Listen for keydown events and trigger the onclick functions
+        document.onkeydown = function(event) {
+            var audio = document.querySelector('audio[data-key="' + event.keyCode + '"]');
+            var btn = document.getElementById(String.fromCharCode(event.keyCode).toLowerCase());
+            if (audio && btn) {
+                setBgColor(btn, audio);
+            }
+        };
+    </script>
+    <audio data-key="65" src="music/Rafael_Archangel_-_08_-_Two_Heads_-_174bpm_1.mp3"></audio>
+    <audio data-key="66" src="music/Rafael_Archangel_-_08_-_Two_Heads_-_174bpm_2.mp3"></audio>
+    <audio data-key="67" src="music/Rafael_Archangel_-_08_-_Two_Heads_-_174bpm_3.mp3"></audio>
+    <audio data-key="68" src="music/Rafael_Archangel_-_08_-_Two_Heads_-_174bpm_4.mp3"></audio>
+    <audio data-key="69" src="music/Rafael_Archangel_-_08_-_Two_Heads_-_174bpm_5.mp3"></audio>
+    <audio data-key="70" src="music/Rafael_Archangel_-_08_-_Two_Heads_-_174bpm_6.mp3"></audio>
+    <h3>follow instagram: @hackers_en_route for more</h3>
+</body>
+</html>
